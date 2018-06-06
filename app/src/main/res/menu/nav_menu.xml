@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/call"
+        android:icon="@mipmap/ic_launcher"
+        android:title="call"/>
+    <item
+        android:id="@+id/email"
+        android:icon="@mipmap/ic_launcher"
+        android:title="email"/>
+    <item
+        android:id="@+id/friends"
+        android:icon="@mipmap/ic_launcher"
+        android:title="friends"/>
+    <item
+        android:id="@+id/task"
+        android:icon="@mipmap/ic_launcher"
+        android:title="task"/>
+    <item
+        android:id="@+id/location"
+        android:icon="@mipmap/ic_launcher"
+        android:title="location"/>
+</menu>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--*************** 头像 ****************-->
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/icon_image"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_centerInParent="true"/>
+
+    <!--*************** 邮箱 ****************-->
+    <TextView
+        android:id="@+id/mail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:text="KXwonderful@gmail.com"
+        android:textColor="@color/white"
+        android:textSize="14sp"/>
+
+    <!--*************** 用户名 ****************-->
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/mail"
+        android:gravity="center"
+        android:text="开心wonderful"
+        android:textColor="@color/white"
+        android:textSize="14sp"/>
+
+    作者：开心wonderful
+    链接：https://www.jianshu.com/p/b2bd6c6aaad5
+    來源：简书
+    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+</RelativeLayout>

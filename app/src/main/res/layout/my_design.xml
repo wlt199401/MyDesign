@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/draw_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <!--我们使用了 ToolBar 控件，该控件是 appcompat-v7库提供的，高度指定为 ActionBar 的高度，-->
+        <!--背景色设置为 colorPrimary。接下来，我们设置了主题，因为我们在 style.xm里面将程序的主题设置成了淡色主题，-->
+        <!--因此 ToolBar 也是淡色主题，ToolBar 上的元素就会自动使用深色主题，看起来很难看，-->
+        <!--为了让 ToolBar 单独使用深色主题，我们就使用了 theme 为 ToolBar 单独指定了一个主题：ThemeOverlay.AppCompat.Dark.ActionBar，-->
+        <!--但是这样又会有一个问题，如果 ToolBar 中有菜单按钮，弹出的菜单项会变成深色主题，又变得很难看，-->
+        <!--于是使用了 app:popupTheme属性单独将弹出的菜单指定成了淡色主题。-->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+        </android.support.v4.view.ViewPager>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/button"/>
+            <RadioGroup
+                android:id="@+id/rg_tab_bar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingTop="10dp"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_home"
+                    style="@style/tab_menu_item"
+                    android:drawableTop="@drawable/tab_menu_home"
+                    android:text="@string/tab_home" />
+
+                <RadioButton
+                    android:id="@+id/rb_order"
+                    style="@style/tab_menu_item"
+                    android:drawableTop="@drawable/tab_menu_order"
+                    android:text="@string/tab_order" />
+
+                <RadioButton
+                    android:id="@+id/rb_goods"
+                    style="@style/tab_menu_item"
+                    android:drawableTop="@drawable/tab_menu_goods"
+                    android:text="@string/tab_goods" />
+
+                <RadioButton
+                    android:id="@+id/rb_mine"
+                    style="@style/tab_menu_item"
+                    android:drawableTop="@drawable/tab_menu_mine"
+                    android:text="@string/tab_mine" />
+            </RadioGroup>
+
+    </LinearLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nav_menu" />
+</android.support.v4.widget.DrawerLayout>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MyDesign</string>
+    <string name="tab_home">首页</string>
+    <string name="tab_order">订单</string>
+    <string name="tab_goods">购物车</string>
+    <string name="tab_mine">我的</string>
+</resources>

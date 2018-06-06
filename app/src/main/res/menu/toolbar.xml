@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--使用 showAsAction 来指定按钮的显示位置 ，
+            这里之所以使用 app 命名空间，是为了能够
+            兼容低版本-->
+    <!-- always 表示永远显示在 ToolBar 上，如果屏幕空间不够则不显示 -->
+    <!--<item-->
+        <!--android:id="@+id/backup"-->
+        <!--android:icon="@mipmap/ic_launcher"-->
+        <!--android:title="Backup"-->
+        <!--app:showAsAction="always"/>-->
+    <!--&lt;!&ndash;ifRoom 表示如果屏幕空间足够就显示在 ToolBar 上，-->
+       <!--不够的话就显示在菜单当中&ndash;&gt;-->
+    <!--<item-->
+        <!--android:id="@+id/delete"-->
+        <!--android:icon="@mipmap/ic_launcher"-->
+        <!--android:title="delete"-->
+        <!--app:showAsAction="ifRoom"/>-->
+    <!--&lt;!&ndash; never 表示永远显示在菜单当中&ndash;&gt;-->
+    <item
+        android:id="@+id/settings"
+        android:icon="@mipmap/menu_up_add"
+        android:title="settings"
+        app:showAsAction="always"/>
+</menu>
