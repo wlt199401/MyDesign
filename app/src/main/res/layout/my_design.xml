@@ -21,24 +21,32 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+            android:background="@color/button"
+            android:theme="@style/HomeTheme"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+            <TextView
+                android:id="@+id/tb_text"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="18sp"/>
+        </android.support.v7.widget.Toolbar>
         <android.support.v4.view.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
-        </android.support.v4.view.ViewPager>
+            android:layout_weight="1"/>
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="1px"
+            android:layout_height="@dimen/dp_0_5"
             android:background="@color/button"/>
             <RadioGroup
                 android:id="@+id/rg_tab_bar"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingTop="10dp"
+                android:layout_height="@dimen/dp_50"
+                android:paddingTop="@dimen/dp_10"
                 android:layout_alignParentBottom="true"
                 android:orientation="horizontal">
 

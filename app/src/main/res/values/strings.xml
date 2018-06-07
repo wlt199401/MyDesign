@@ -4,4 +4,6 @@
     <string name="tab_order">订单</string>
     <string name="tab_goods">购物车</string>
     <string name="tab_mine">我的</string>
+    <string name="search_hint">请输入搜索内容</string>
+    <string name="search_button">搜索</string>
 </resources>

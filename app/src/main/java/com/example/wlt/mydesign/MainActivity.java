@@ -1,5 +1,6 @@
 package com.example.wlt.mydesign;
 
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -17,20 +18,25 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.GridLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wlt.mydesign.View.fragment.GoodsFragment;
 import com.example.wlt.mydesign.View.fragment.HomeFragment;
 import com.example.wlt.mydesign.View.fragment.MineFragment;
 import com.example.wlt.mydesign.View.fragment.OrderFragment;
+import com.example.wlt.mydesign.base.BaseActivity;
+import com.example.wlt.mydesign.base.StatusBarUtils;
 
 
-public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener,ViewPager.OnPageChangeListener{
+public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener,ViewPager.OnPageChangeListener{
 
     private Toolbar toolbar;
+    private TextView tb_text;
     private DrawerLayout drawerLayout;
     private NavigationView navView;
     private ViewPager viewPager;
@@ -51,13 +57,17 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_design);
+//        StatusBarUtils.setActivityTranslucent(this);
+        StatusBarUtils.setStatusBarColor(this,"#059f9e");
         initView();
         initEvent();
+        initState();
     }
 
     //绑定view
     private void initView() {
         toolbar = findViewById(R.id.toolbar);
+        tb_text = findViewById(R.id.tb_text);
         drawerLayout = findViewById(R.id.draw_layout);
         navView = findViewById(R.id.nav_view);
         viewPager = findViewById(R.id.viewPager);
@@ -130,15 +140,19 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
             switch (viewPager.getCurrentItem()){
                 case PAGE_ONE:
                     rb_home.setChecked(true);
+                    tb_text.setText(R.string.tab_home);
                     break;
                 case PAGE_TWO:
                     rb_order.setChecked(true);
+                    tb_text.setText(R.string.tab_order);
                     break;
                 case PAGE_THREE:
                     rb_goods.setChecked(true);
+                    tb_text.setText(R.string.tab_goods);
                     break;
                 case PAGE_FOUR:
                     rb_mine.setChecked(true);
+                    tb_text.setText(R.string.tab_mine);
                     break;
             }
         }
@@ -149,15 +163,19 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         switch (checkedId) {
             case R.id.rb_home:
                 viewPager.setCurrentItem(PAGE_ONE);
+                tb_text.setText(R.string.tab_home);
                 break;
             case R.id.rb_order:
                 viewPager.setCurrentItem(PAGE_TWO);
+                tb_text.setText(R.string.tab_order);
                 break;
             case R.id.rb_goods:
                 viewPager.setCurrentItem(PAGE_THREE);
+                tb_text.setText(R.string.tab_goods);
                 break;
             case R.id.rb_mine:
                 viewPager.setCurrentItem(PAGE_FOUR);
+                tb_text.setText(R.string.tab_mine);
                 break;
         }
     }
@@ -165,6 +183,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     private class MyFragmentPagerAdapter extends FragmentPagerAdapter{
 
         private final int PAGER_COUNT = 4;
+
         private HomeFragment homeFragment;
         private OrderFragment orderFragment;
         private GoodsFragment goodsFragment;
@@ -176,7 +195,6 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
             goodsFragment = new GoodsFragment();
             mineFragment = new MineFragment();
         }
-
         @Override
         public Fragment getItem(int position) {
             Fragment fragment = null;
@@ -211,5 +229,9 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         public void destroyItem(ViewGroup container, int position, Object object) {
             super.destroyItem(container, position, object);
         }
+
+    }
+    private void initState() {
+
     }
 }

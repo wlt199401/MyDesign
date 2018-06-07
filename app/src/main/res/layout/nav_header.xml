@@ -7,8 +7,8 @@
     <!--*************** 头像 ****************-->
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/icon_image"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_80"
         android:src="@mipmap/ic_launcher"
         android:layout_centerInParent="true"/>
 
@@ -21,7 +21,7 @@
         android:gravity="center"
         android:text="KXwonderful@gmail.com"
         android:textColor="@color/white"
-        android:textSize="14sp"/>
+        android:textSize="@dimen/sp_14"/>
 
     <!--*************** 用户名 ****************-->
     <TextView
@@ -32,10 +32,5 @@
         android:gravity="center"
         android:text="开心wonderful"
         android:textColor="@color/white"
-        android:textSize="14sp"/>
-
-    作者：开心wonderful
-    链接：https://www.jianshu.com/p/b2bd6c6aaad5
-    來源：简书
-    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+        android:textSize="@dimen/sp_14"/>
 </RelativeLayout>
