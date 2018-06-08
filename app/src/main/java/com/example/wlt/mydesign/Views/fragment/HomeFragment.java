@@ -1,43 +1,46 @@
-package com.example.wlt.mydesign.View.fragment;
+package com.example.wlt.mydesign.Views.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.TestLooperManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.NestedScrollView;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.wlt.mydesign.Bean.Goods;
+import com.example.wlt.mydesign.Presenter.HomePresenter;
 import com.example.wlt.mydesign.R;
-import com.example.wlt.mydesign.View.fragment.imageSlideShow.ImageSlideBean;
-import com.example.wlt.mydesign.View.fragment.imageSlideShow.ImageSlideView;
-import com.example.wlt.mydesign.View.fragment.imageSlideShow.MyImageSlideView;
+import com.example.wlt.mydesign.Views.MvpView;
+import com.example.wlt.mydesign.Views.imageSlideShow.MyImageSlideView;
+import com.example.wlt.mydesign.base.net.GoodsService;
+import com.example.wlt.mydesign.base.util.Internet;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
 
 /**
  * Created by 25122 on 2018/6/4.
  */
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseFragment implements MvpView{
 
+    HomePresenter presenter;
     private MyImageSlideView imageSlideView;
     private RecyclerView recyclerView;
     private MyRecyclerViewAdapter adapter;
@@ -48,15 +51,26 @@ public class HomeFragment extends Fragment {
     public HomeFragment() {
     }
 
+    @Override
+    public int getContentViewId() {
+        return R.layout.frg_home;
+    }
+
+    @Override
+    protected void initAllMembersView(Bundle saveInstanceState) {
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frg_home, null, false);
+        initAllMembersView(savedInstanceState);
         initView();
         initData();
         imageSlideView.commit();
         return view;
     }
+
 
     private void initView() {
         imageSlideView = view.findViewById(R.id.slide_main);
@@ -65,28 +79,10 @@ public class HomeFragment extends Fragment {
         titleList = new ArrayList<>();
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
         recyclerView.setLayoutManager(gridLayoutManager);
-        List<String> mList = new ArrayList<>();
-        mList.add("http://www.dshaitao.com/wximg/product/9316753996400/9316753996400-1.jpg");
-        mList.add("http://www.dshaitao.com/wximg/product/9316753996400/9316753996400-1.jpg");
-        mList.add("http://www.dshaitao.com/wximg/product/9316753996400/9316753996400-1.jpg");
-        mList.add("http://www.dshaitao.com/wximg/product/9316753996400/9316753996400-1.jpg");
-        mList.add("http://www.dshaitao.com/wximg/product/9316753996400/9316753996400-1.jpg");
-        mList.add("http://www.dshaitao.com/wximg/product/9316753996400/9316753996400-1.jpg");
-        mList.add("http://www.dshaitao.com/wximg/product/9316753996400/9316753996400-1.jpg");
-        mList.add("http://www.dshaitao.com/wximg/product/9316753996400/9316753996400-1.jpg");
-        mList.add("http://www.dshaitao.com/wximg/product/9316753996400/9316753996400-1.jpg");
-        mList.add("http://www.dshaitao.com/wximg/product/9316753996400/9316753996400-1.jpg");
-        mList.add("http://www.dshaitao.com/wximg/product/9316753996400/9316753996400-1.jpg");
-        mList.add("http://www.dshaitao.com/wximg/product/9316753996400/9316753996400-1.jpg");
-        mList.add("http://www.dshaitao.com/wximg/product/9316753996400/9316753996400-1.jpg");
-        mList.add("http://www.dshaitao.com/wximg/product/9316753996400/9316753996400-1.jpg");
-        mList.add("http://www.dshaitao.com/wximg/product/9316753996400/9316753996400-1.jpg");
-        mList.add("http://www.dshaitao.com/wximg/product/9316753996400/9316753996400-1.jpg");
-        mList.add("http://www.dshaitao.com/wximg/product/9316753996400/9316753996400-1.jpg");
-        mList.add("http://www.dshaitao.com/wximg/product/9316753996400/9316753996400-1.jpg");
-        adapter = new MyRecyclerViewAdapter(getActivity(),mList);
-        recyclerView.setAdapter(adapter);
         recyclerView.setNestedScrollingEnabled(false);
+        presenter = new HomePresenter();
+        presenter.attachView(this);
+        presenter.getData("1");
     }
 
     /**
@@ -114,11 +110,19 @@ public class HomeFragment extends Fragment {
         imageSlideView.releaseResource();//释放资源
     }
 
+    @Override
+    public void showData(String data) {
+        Gson gson = new Gson();
+        Type type = new TypeToken<List<Goods>>(){}.getType();
+        List<Goods> goodsList = gson.fromJson(data,type);
+        adapter = new MyRecyclerViewAdapter(getActivity(),goodsList);
+        recyclerView.setAdapter(adapter);
+    }
     private class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
         private Context context;
-        private List<String> list;
+        private List<Goods> list;
 
-        public MyRecyclerViewAdapter(Context context, List<String> list) {
+        public MyRecyclerViewAdapter(Context context, List<Goods> list) {
             this.context = context;
             this.list = list;
         }
@@ -145,7 +149,7 @@ public class HomeFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            Glide.with(context).load(list.get(position)).into(holder.imageView);
+            Glide.with(context).load(list.get(position).getPIC_THUMB()).into(holder.imageView);
         }
 
         @Override

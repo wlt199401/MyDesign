@@ -1,4 +1,4 @@
-package com.example.wlt.mydesign.View.fragment.imageSlideShow;
+package com.example.wlt.mydesign.Views.imageSlideShow;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
@@ -14,7 +14,6 @@ import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;

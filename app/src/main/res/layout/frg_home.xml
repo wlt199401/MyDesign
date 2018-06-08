@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.example.wlt.mydesign.View.fragment.imageSlideShow.MyImageSlideView
+            <com.example.wlt.mydesign.Views.imageSlideShow.MyImageSlideView
                 android:id="@+id/slide_main"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_150"

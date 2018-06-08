@@ -1,4 +1,4 @@
-package com.example.wlt.mydesign.View.fragment.imageSlideShow;
+package com.example.wlt.mydesign.Views.imageSlideShow;
 
 /**
  * Created by 25122 on 2018/6/5.

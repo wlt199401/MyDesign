@@ -6,4 +6,5 @@
     <string name="tab_mine">我的</string>
     <string name="search_hint">请输入搜索内容</string>
     <string name="search_button">搜索</string>
+    <string name="api_error_msg">连接失败</string>
 </resources>

@@ -1,8 +1,6 @@
 package com.example.wlt.mydesign;
 
-import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,29 +9,28 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.GridLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.wlt.mydesign.View.fragment.GoodsFragment;
-import com.example.wlt.mydesign.View.fragment.HomeFragment;
-import com.example.wlt.mydesign.View.fragment.MineFragment;
-import com.example.wlt.mydesign.View.fragment.OrderFragment;
+import com.example.wlt.mydesign.Presenter.HomePresenter;
+import com.example.wlt.mydesign.Views.MvpView;
+import com.example.wlt.mydesign.Views.fragment.GoodsFragment;
+import com.example.wlt.mydesign.Views.fragment.HomeFragment;
+import com.example.wlt.mydesign.Views.fragment.MineFragment;
+import com.example.wlt.mydesign.Views.fragment.OrderFragment;
 import com.example.wlt.mydesign.base.BaseActivity;
 import com.example.wlt.mydesign.base.StatusBarUtils;
 
 
-public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener,ViewPager.OnPageChangeListener{
+public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener,ViewPager.OnPageChangeListener,MvpView{
 
     private Toolbar toolbar;
     private TextView tb_text;
@@ -112,7 +109,6 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.settings:
-                Toast.makeText(this, "settings", Toast.LENGTH_SHORT).show();
                 break;
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
@@ -178,6 +174,11 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 tb_text.setText(R.string.tab_mine);
                 break;
         }
+    }
+
+    @Override
+    public void showData(String data) {
+        Log.d("MainActivity","ss");
     }
 
     private class MyFragmentPagerAdapter extends FragmentPagerAdapter{
